@@ -11,7 +11,7 @@ use App\Services\Notes;
 use Nyholm\Psr7\Response;
 use Nyholm\Psr7\ServerRequest;
 
-class PostNote
+class PostNote extends ControllerAbstract
 {
 
     /**
@@ -31,6 +31,7 @@ class PostNote
      * @param ServerRequest $request
      * @param Response $response
      * @return Response
+     * @throws InternalServerException
      */
     public function __invoke(ServerRequest $request, Response $response): Response
     {
@@ -45,7 +46,7 @@ class PostNote
             throw new InternalServerException($e->getMessage());
         }
 
-        $response->getBody()->write((string)json_encode($note, JSON_THROW_ON_ERROR));
+        $response->getBody()->write($this->getJsonResponse($note));
         return $response;
     }
 }

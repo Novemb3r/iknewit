@@ -6,19 +6,18 @@ namespace App\Controllers;
 
 use App\Controllers\Exception\InternalServerException;
 use App\Controllers\Exception\NotFoundException;
-use App\DataMappers\Exception\DataMapperException;
-use App\DataMappers\Exception\NotFoundDataMapperException;
-use App\DataMappers\Exception\WrongClassDataMapperException;
 use App\Services\Exception\NotFoundServiceException;
 use App\Services\Exception\ServiceException;
 use App\Services\Notes;
 use Nyholm\Psr7\Response;
 use Nyholm\Psr7\ServerRequest;
 
-class GetNote
+class GetNote extends ControllerAbstract
 {
 
-    /** @var Notes */
+    /**
+     * @var Notes
+     */
     private Notes $notesService;
 
     /**
@@ -47,7 +46,7 @@ class GetNote
             throw new InternalServerException($e->getMessage());
         }
 
-        $response->getBody()->write((string)json_encode($data));
+        $response->getBody()->write($this->getJsonResponse($data));
         return $response;
     }
 }
