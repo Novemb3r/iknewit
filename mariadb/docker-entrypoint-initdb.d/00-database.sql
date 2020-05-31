@@ -6,5 +6,6 @@ SET NAMES utf8;
 CREATE TABLE IF NOT EXISTS `notes`
 (
     `id`   INT AUTO_INCREMENT PRIMARY KEY,
-    `text` VARCHAR(255) NOT NULL
+    `text` VARCHAR(255) NOT NULL,
+    `createdAt` DATETIME
 ) ENGINE InnoDB;
