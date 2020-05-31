@@ -8,6 +8,7 @@ use App\Controllers\Exception\InternalServerException;
 use App\Entities\Note;
 use App\Services\Exception\ServiceException;
 use App\Services\Notes;
+use DateTime;
 use Nyholm\Psr7\Response;
 use Nyholm\Psr7\ServerRequest;
 
@@ -39,6 +40,7 @@ class PostNote extends ControllerAbstract
 
         $note = new Note();
         $note->setText($body['text']);
+        $note->setCreatedAt(new DateTime());
 
         try {
             $this->notesService->save($note);

@@ -22,7 +22,7 @@ deps-release:
 
 run-static-analysis:
 	@echo Run static analysis code for scripts/
-	vendor/bin/phpstan analyse -l 7 -c phpstan.neon scripts tests
+	vendor/bin/phpstan analyse -l 7 -c phpstan.neon scripts tests public
 	@echo Done
 
 check-codestyle:
@@ -35,4 +35,9 @@ repair-codestyle:
 	@echo Check codestyle
 	vendor/bin/phpcbf --config-set colors 1
 	vendor/bin/phpcbf --standard=PSR1,PSR2,PSR12 scripts tests
+	@echo Done
+
+update-schema:
+	@echo Updating database schme
+	php vendor/bin/doctrine orm:schema-tool:update --force
 	@echo Done

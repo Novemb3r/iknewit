@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DataSource;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
 
 class Doctrine
@@ -16,12 +17,12 @@ class Doctrine
     public EntityManager $entityManager;
 
     /**
-     * @throws \Doctrine\ORM\ORMException
+     * @throws ORMException
      */
     public function __construct()
     {
         $configuration = Setup::createAnnotationMetadataConfiguration(
-            [__DIR__ . './Entities'],
+            [ROOT_PATH . '/scripts/Entities'],
             true
         );
 
